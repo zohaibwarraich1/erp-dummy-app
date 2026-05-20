@@ -101,7 +101,7 @@ jobs:
       - name: Clone GitOps Repo for Validation
         uses: actions/checkout@v3
         with:
-          repository: 'https://github.com/zohaibwarraich1/erp-gitops-config.git'
+          repository: 'zohaibwarraich1/erp-gitops-config'
           path: 'gitops-repo'
           token: ${{ secrets.GIT_TOKEN }}
       - name: Run Helm Validation
