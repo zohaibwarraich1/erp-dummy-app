@@ -14,6 +14,6 @@ COPY . .
 RUN chown -R erpuser:erpuser /app
 USER erpuser
 
-EXPOSE 80
+EXPOSE 5000
 
 CMD ["python", "app.py"]
