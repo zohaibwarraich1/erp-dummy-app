@@ -45,13 +45,13 @@ jobs:
 
       # 4. Docker Build
       - name: Build Docker Image
-        run: docker build -t digitalsofts/erp-app:${{ github.sha }} .
+        run: docker build -t zohaibwarraich/erp-dummy-app:${{ github.sha }} .
 
       # 5. Trivy Scan (Image Scanning)
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'digitalsofts/erp-app:${{ github.sha }}'
+          image-ref: 'zohaibwarraich/erp-dummy-app:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
