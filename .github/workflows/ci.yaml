@@ -79,7 +79,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
   deploy:
-    name: GitOps Deployment
+    name: Helm validation and GitOps Deployment
     runs-on: ubuntu-latest
     needs: [build, sonar]
     environment: prod
