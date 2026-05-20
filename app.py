@@ -3,16 +3,21 @@ import os
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello():
     tenant = os.environ.get('TENANT_NAME', 'Unknown Tenant')
     db_host = os.environ.get('DATABASE_HOST', 'Not Configured')
     db_name = os.environ.get('DATABASE_NAME', 'Not Configured')
     db_pass = os.environ.get('POSTGRES_PASSWORD', 'Not Configured')
-    app_env = os.environ.get('APP_ENV', 'production') # Utilizing the APP_ENV from ConfigMap
-    
+    # Utilizing the APP_ENV from ConfigMap
+    app_env = os.environ.get('APP_ENV', 'production')
+
     # Simulating the database connection status
-    db_status = "Connected" if db_host != "Not Configured" and db_pass != "Not Configured" else "Disconnected"
+    is_db_configured = (
+        db_host != "Not Configured" and db_pass != "Not Configured"
+    )
+    db_status = "Connected" if is_db_configured else "Disconnected"
 
     return jsonify({
         "message": f"Welcome to the ERP system for {tenant}!",
@@ -24,6 +29,7 @@ def hello():
             "connection_status": db_status
         }
     })
+
 
 if __name__ == '__main__':
     # Dynamically enable Flask debug mode based on the environment (APP_ENV)
