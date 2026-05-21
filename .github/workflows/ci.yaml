@@ -1,7 +1,7 @@
 name: ERP Application CI/CD Pipeline
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 on:
   push:
@@ -69,7 +69,8 @@ jobs:
           args: >
             -Dsonar.projectKey=zohaibwarraich1_erp-dummy-app
             -Dsonar.organization=zohaibwarraich1
-            -Dsonar.sources=.
+            -Dsonar.sources=app.py
+            -Dsonar.tests=test_app.py
             -Dsonar.python.coverage.reportPaths=coverage.xml
 
   build:
