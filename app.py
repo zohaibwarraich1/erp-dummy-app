@@ -1,7 +1,12 @@
 from flask import Flask, jsonify
 import os
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+# Add custom metric for DB connectivity
+db_status_metric = metrics.info('erp_db_connected', 'Database connection status', version='1.0.0')
 
 
 @app.route('/')
