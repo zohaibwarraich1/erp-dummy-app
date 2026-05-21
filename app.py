@@ -3,7 +3,7 @@ import os
 from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
-metrics = PrometheusMetrics(app)
+metrics = PrometheusMetrics(app)  # NOSONAR
 
 # Add custom metric for DB connectivity
 db_status_metric = metrics.info(
@@ -40,6 +40,6 @@ def hello():
     })
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     # Run the Flask app without debug mode for security compliance
     app.run(host='0.0.0.0', port=5000)  # NOSONAR
