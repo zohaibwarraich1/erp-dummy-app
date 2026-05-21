@@ -41,7 +41,5 @@ def hello():
 
 
 if __name__ == '__main__':
-    # Dynamically enable Flask debug mode based on the environment (APP_ENV)
-    app_env = os.environ.get('APP_ENV', 'production')
-    debug_mode = True if app_env == 'development' else False
-    app.run(host='0.0.0.0', port=5000, debug=debug_mode)
+    # Run the Flask app without debug mode for security compliance
+    app.run(host='0.0.0.0', port=5000)

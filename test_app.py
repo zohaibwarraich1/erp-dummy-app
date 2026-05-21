@@ -28,3 +28,9 @@ def test_hello_endpoint(client):
     assert data["database"]["host"] == "test-db-svc"
     assert data["database"]["name"] == "erp_test"
     assert data["database"]["connection_status"] == "Connected"
+
+
+def test_metrics_endpoint(client):
+    response = client.get('/metrics')
+    assert response.status_code == 200
+    assert b'erp_db_connected' in response.data
