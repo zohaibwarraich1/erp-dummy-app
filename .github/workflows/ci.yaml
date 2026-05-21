@@ -40,7 +40,7 @@ jobs:
       - name: Run Unit Tests
         run: pytest --cov=app --cov-report=xml test_app.py --junitxml=test-results.xml
       - name: Upload Coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage.xml
@@ -54,7 +54,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
       - name: Download Coverage
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: coverage-report
       - name: SonarQube Scan
