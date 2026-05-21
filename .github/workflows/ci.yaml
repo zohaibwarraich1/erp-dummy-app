@@ -42,12 +42,6 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Unit Tests
         run: pytest --cov=app --cov-report=xml test_app.py --junitxml=test-results.xml
-      - name: Upload Coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage.xml
-
   sonar:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
@@ -56,10 +50,14 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Download Coverage
-        uses: actions/download-artifact@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: coverage-report
+          python-version: '3.9'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Generate Coverage
+        run: pytest --cov=app --cov-report=xml test_app.py
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
