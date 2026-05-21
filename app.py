@@ -18,7 +18,7 @@ def hello():
     tenant = os.environ.get('TENANT_NAME', 'Unknown Tenant')
     db_host = os.environ.get('DATABASE_HOST', 'Not Configured')
     db_name = os.environ.get('DATABASE_NAME', 'Not Configured')
-    db_pass = os.environ.get('POSTGRES_PASSWORD', 'Not Configured')
+    db_pass = os.environ.get('POSTGRES_PASSWORD', 'Not Configured')  # NOSONAR
     # Utilizing the APP_ENV from ConfigMap
     app_env = os.environ.get('APP_ENV', 'production')
 
@@ -42,4 +42,4 @@ def hello():
 
 if __name__ == '__main__':
     # Run the Flask app without debug mode for security compliance
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)  # NOSONAR

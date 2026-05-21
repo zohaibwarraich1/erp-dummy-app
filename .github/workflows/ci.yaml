@@ -38,7 +38,12 @@ jobs:
       - name: Install Test Dependencies
         run: pip install -r requirements.txt
       - name: Run Unit Tests
-        run: pytest test_app.py --junitxml=test-results.xml
+        run: pytest --cov=app --cov-report=xml test_app.py --junitxml=test-results.xml
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
 
   sonar:
     name: SonarQube Analysis
@@ -48,6 +53,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      - name: Download Coverage
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-report
       - name: SonarQube Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -58,6 +67,7 @@ jobs:
             -Dsonar.projectKey=zohaibwarraich1_erp-dummy-app
             -Dsonar.organization=zohaibwarraich1
             -Dsonar.sources=.
+            -Dsonar.python.coverage.reportPaths=coverage.xml
 
   build:
     name: Build Docker Image and Trivy Scan
